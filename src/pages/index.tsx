@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import Head from "next/head";
 import { SearchResults } from "../components/SearchResults";
 
@@ -19,6 +19,10 @@ export default function Home() {
     setResults(data);
   }
 
+  const addToWishList = useCallback(async (id: number) => {
+    console.log(id)
+  }, [])
+
   return (
     <>
       <Head>
@@ -37,8 +41,17 @@ export default function Home() {
           <button type="submit">Buscar</button>
         </form>
 
-        <SearchResults results={results} />
+        <SearchResults 
+          results={results}
+          onAddToWishList={addToWishList} 
+        />
       </div>
     </>
   );
 }
+
+/**
+ * Cases to useCallback()
+ * 
+ * 1. Reference equality
+ */
